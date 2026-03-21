@@ -62,16 +62,20 @@
         <div class="card" id="flashcard">
           <div class="face front">
             <h2 id="q-display">Q</h2>
-            <p>Click to flip</p>
+            <p style="opacity: 0.6; font-size: 0.9rem;">Type your answer below</p>
           </div>
           <div class="face back">
             <h2 id="a-display">A</h2>
           </div>
         </div>
       </div>
-      <div id="quiz-actions" class="hidden quiz-actions">
-        <button id="missed-btn" class="btn danger">Missed It</button>
-        <button id="got-btn" class="btn success">Got It</button>
+      <div id="quiz-input-area" class="quiz-actions">
+        <input type="text" id="user-answer" placeholder="Type your answer here..." style="margin-bottom: 0; flex: 1;" autocomplete="off">
+        <button id="submit-answer-btn" class="btn primary">Check</button>
+      </div>
+      <div id="quiz-next-area" class="hidden quiz-actions" style="justify-content: space-between; width: 100%;">
+        <p id="feedback-msg" style="font-weight:bold; align-self: center; margin: 0;"></p>
+        <button id="next-btn" class="btn secondary">Next Question ➔</button>
       </div>
       <label><input type="checkbox" id="timer-toggle"> 15s Timer</label>
     </div>

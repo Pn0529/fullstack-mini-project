@@ -73,7 +73,12 @@ $('start-btn').onclick = () => {
 const showCard = () => {
   if(qIdx >= quizCards.length) return endQuiz();
   $('flashcard').classList.remove('flipped');
-  $('quiz-actions').classList.add('hidden');
+  $('quiz-input-area').classList.remove('hidden');
+  $('quiz-next-area').classList.add('hidden');
+  $('user-answer').disabled = false;
+  $('user-answer').value = '';
+  setTimeout(() => $('user-answer').focus(), 50);
+  
   $('q-display').innerText = quizCards[qIdx].q;
   $('a-display').innerText = quizCards[qIdx].a;
   $('progress-fill').style.width = `${((qIdx) / quizCards.length) * 100}%`;
@@ -85,29 +90,43 @@ const showCard = () => {
       $('timer-display').innerText = `${--timeLeft}s`;
       if(timeLeft <= 0) { 
         clearInterval(timer); 
-        $('flashcard').classList.add('flipped'); 
-        setTimeout(() => answer(false), 1500); 
+        checkAnswer(''); // empty string means they timed out
       }
     }, 1000);
   } else { $('timer-display').innerText = "No timer"; }
 };
 
-$('flashcard').onclick = () => {
-  if($('flashcard').classList.contains('flipped')) return;
-  $('flashcard').classList.add('flipped');
-  $('quiz-actions').classList.remove('hidden');
+const checkAnswer = (userVal) => {
+  if ($('flashcard').classList.contains('flipped')) return; // Prevent double submit
   clearInterval(timer);
-};
-
-const answer = (correct) => {
+  $('user-answer').disabled = true;
+  $('flashcard').classList.add('flipped');
+  
   const rc = deck.find(c => c.id === quizCards[qIdx].id);
-  // WebAudio API simple feedback beep could go here
-  correct ? (rc.c++, score++) : rc.w++;
-  save(); qIdx++; showCard();
+  const clean = str => str.toLowerCase().replace(/[^a-z0-9]/g, '');
+  const correctA = clean(quizCards[qIdx].a);
+  const userA = clean(userVal);
+  
+  if (correctA === userA && userA !== '') {
+    rc.c++; score++;
+    $('feedback-msg').innerText = "✅ Correct!";
+    $('feedback-msg').style.color = "var(--success)";
+  } else {
+    rc.w++;
+    $('feedback-msg').innerText = `❌ Incorrect!`;
+    $('feedback-msg').style.color = "var(--danger)";
+  }
+  
+  save();
+  $('quiz-input-area').classList.add('hidden');
+  $('quiz-next-area').classList.remove('hidden');
+  $('next-btn').focus();
 };
 
-$('got-btn').onclick = () => answer(true);
-$('missed-btn').onclick = () => answer(false);
+$('submit-answer-btn').onclick = () => checkAnswer($('user-answer').value);
+$('user-answer').onkeypress = (e) => { if (e.key === 'Enter') checkAnswer($('user-answer').value); };
+$('next-btn').onclick = () => { qIdx++; showCard(); };
+
 $('exit-btn').onclick = () => { clearInterval(timer); switchView('edit'); };
 
 const endQuiz = () => {
