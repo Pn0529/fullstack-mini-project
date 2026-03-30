@@ -19,7 +19,28 @@ body { background: var(--bg); color: var(--text); min-height: 100vh; padding-bot
 
 /* Components */
 .glass { background: var(--glass); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); border-radius: 12px; padding: 1.5rem; box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
-.glass-nav { display: flex; justify-content: space-between; padding: 1rem 2rem; background: var(--glass); margin-bottom: 2rem; }
+.glass-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: var(--glass);
+  margin-bottom: 2rem;
+}
+
+.user-info {
+  color: var(--text);
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
 .btn { padding: 0.5rem 1rem; border-radius: 6px; border: none; font-weight: bold; cursor: pointer; color: white; transition: 0.2s; }
 .btn:hover { opacity: 0.9; transform: scale(0.98); }
 .btn:disabled { opacity: 0.5; cursor: not-allowed; }

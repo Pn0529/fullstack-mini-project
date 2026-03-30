@@ -83,16 +83,16 @@ By providing a user-friendly interface and advanced features like AI-powered car
 
 ## MODULES  
 
-1. **Home page** - Main dashboard with overview of flashcard decks
-2. **Login page** - Secure user authentication
-3. **Sign-up page** - New user registration
-4. **Create Flashcards** - Interface for creating new flashcards
-5. **Flashcard Management** - Edit, delete, and organize cards
-6. **Study Mode** - Interactive quiz interface
-7. **Progress Tracking** - Performance analytics and statistics
-8. **Import/Export** - Data management features
-9. **Settings** - User preferences and configurations
-10. **Logout** - Secure session termination
+1. **Home Page/Dashboard** - Main dashboard displaying an overview of flashcard decks
+2. **Login Page** - Secure user authentication with username/password validation
+3. **Sign-Up Page** - New user registration with email and password confirmation
+4. **Create Flashcards** - Interface for crafting new flashcards with AI generation
+5. **Flashcard Management** - Options to edit, delete, and organize cards with search/filter
+6. **Study Mode** - Interactive quiz interface with timer and progress tracking
+7. **Progress Tracking** - Performance analytics and statistics with weak card identification
+8. **Import/Export** - Features for data management with JSON file support
+9. **Settings** - User preferences including theme switching (light/dark mode)
+10. **Logout** - Secure session termination with confirmation prompt
 
 ---
 

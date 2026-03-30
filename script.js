@@ -1,6 +1,17 @@
+// Authentication and User Management
+const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+const username = currentUser ? currentUser.username : 'Guest';
+
+// Update user display
+document.getElementById('user-display').textContent = `Welcome, ${username}`;
+
+// User-specific data storage
+const getUserDeckKey = () => `flashDeck_${username}`;
+const getUserThemeKey = () => `theme_${username}`;
+
 // State
 let appState = 'edit';
-let deck = JSON.parse(localStorage.getItem('flashDeck')) || [];
+let deck = JSON.parse(localStorage.getItem(getUserDeckKey())) || [];
 let quizCards = [], qIdx = 0, score = 0, timer, timeLeft = 15;
 
 // Elements
@@ -39,7 +50,7 @@ $('card-form').onsubmit = e => {
 };
 window.delCard = id => { deck = deck.filter(c => c.id !== id); save(); };
 window.toggleStar = id => { let c = deck.find(c => c.id === id); c.star = !c.star; save(); };
-const save = () => { localStorage.setItem('flashDeck', JSON.stringify(deck)); renderDeck(); };
+const save = () => { localStorage.setItem(getUserDeckKey(), JSON.stringify(deck)); renderDeck(); };
 
 // AI Mock (simulated async fetch)
 $('ai-btn').onclick = async () => {
@@ -146,6 +157,21 @@ $('theme-btn').onclick = () => {
   const root = document.documentElement;
   const th = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
   root.setAttribute('data-theme', th);
+  localStorage.setItem(getUserThemeKey(), th);
+};
+
+// Load user's theme preference
+const userTheme = localStorage.getItem(getUserThemeKey());
+if (userTheme) {
+  document.documentElement.setAttribute('data-theme', userTheme);
+}
+
+// Logout functionality
+$('logout-btn').onclick = () => {
+  if (confirm('Are you sure you want to logout?')) {
+    localStorage.removeItem('currentUser');
+    window.location.href = 'login.html';
+  }
 };
 
 // Import / Export JSON

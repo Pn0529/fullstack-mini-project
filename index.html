@@ -9,11 +9,15 @@
 <body>
   <nav class="glass-nav">
     <h2>🎯 FlashMaster</h2>
+    <div class="user-info">
+      <span id="user-display">Welcome, User</span>
+    </div>
     <div class="actions">
       <button id="theme-btn">🌗 Theme</button>
       <input type="file" id="import-file" accept=".json" class="hidden">
       <button id="import-btn">📥 Import</button>
       <button id="export-btn">📤 Export</button>
+      <button id="logout-btn" class="btn danger">🚪 Logout</button>
     </div>
   </nav>
 
@@ -97,6 +101,12 @@
     </div>
   </section>
 
+  <script>
+    // Check authentication
+    if (!localStorage.getItem('currentUser')) {
+      window.location.href = 'login.html';
+    }
+  </script>
   <script src="script.js"></script>
 </body>
 </html>
