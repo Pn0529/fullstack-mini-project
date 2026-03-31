@@ -12,7 +12,7 @@
 **College:** S.R.K.R. Engineering College, Bhimavaram
 
 ### **Problem Statement:**
-Traditional paper flashcards are inefficient, easily lost, difficult to organize, and lack advanced learning features like progress tracking and spaced repetition.
+we prepare for exams using ai ,and makes notes which is difficult to organize, and cant review them again for long term purpose also dont know how musch we progressed lack advanced learning features like progress tracking and spaced repetition.
 
 ### **Solution:**
 A comprehensive digital flashcard system with user authentication, AI-powered card generation, progress analytics, and multi-user support.
